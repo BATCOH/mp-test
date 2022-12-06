@@ -7,3 +7,9 @@ export const formatData = (data: { name: string }[]): string => {
     .reduce((acc, { name }) => (acc += `${name},`), "")
     .replace(/,\s*$/, "");
 };
+
+export const logInfo = (info: unknown): void => {
+  console.group("%c Info", "color: green;");
+  console.log(info);
+  console.groupEnd();
+};

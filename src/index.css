@@ -1,13 +1,74 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  --color-error: red;
+  --color-action: rgb(78, 183, 253);
+  --color-border: rgb(213, 213, 213);
+  --color-border-hover: rgb(43, 57, 255);
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+button,
+label,
+input,
+select {
+  cursor: pointer;
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+}
+
+input,
+select {
+  padding: 0.3rem 0.6rem;
+  border: 2px solid var(--color-border);
+  background-color: transparent;
+}
+
+.button-delete {
+  background-color: transparent;
+  border: none;
+  font-size: 1.2rem;
+}
+
+.button-action {
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--color-action);
+  font-size: 1.1rem;
+  background-color: transparent;
+  color: var(--color-action);
+}
+
+.app {
+  max-width: 60rem;
+  margin: 0 auto;
+  padding: 1rem 0;
+}
+
+.test-location-form {
+  margin: 1rem 0;
+  padding: 1rem;
+  border: 1px solid var(--color-border);
+}
+
+.test-location-form:hover {
+  border-color: var(--color-border-hover);
+}
+
+.test-location-form__row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.test-location-form__row:not(:last-child) {
+  margin-bottom: 1rem;
 }

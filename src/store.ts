@@ -1,6 +1,6 @@
 import { makeAutoObservable, runInAction } from "mobx";
 import { createContext } from "react";
-import { Store, Locations, Envs, Servers } from "types";
+import { Store, Locations, Envs, Servers, UserForms } from "types";
 import { sleep } from "utils";
 import sample from "./data.json";
 
@@ -9,6 +9,7 @@ class AppStore implements Store {
   locations: Locations = [];
   envs: Envs = [];
   servers: Servers = [];
+  userForms: UserForms = [];
 
   constructor() {
     makeAutoObservable(this);
@@ -25,11 +26,44 @@ class AppStore implements Store {
     });
   };
 
-  createNewLocation(id: number, name: string) {
-    this.locations.push({
-      locationID: id,
-      name,
+  createNewForm({
+    locationID,
+    envID,
+    hint = "",
+  }: {
+    locationID: number;
+    envID: number;
+    hint: string;
+  }) {
+    this.userForms.push({
+      locationID,
+      envID,
+      hint,
     });
+  }
+
+  deleteForm(id: number) {
+    //
+  }
+
+  updateForm({
+    id,
+    locationID,
+    envID,
+    hint,
+  }: {
+    id: number;
+    locationID: number;
+    envID: number;
+    hint: string;
+  }) {
+    if (id < 0 || !this.userForms.length) return;
+
+    const currentForm = this.userForms[id];
+
+    if (typeof locationID === "number") currentForm.locationID = locationID;
+    if (typeof envID === "number") currentForm.envID = envID;
+    if (typeof hint === "string") currentForm.hint = hint;
   }
 }
 

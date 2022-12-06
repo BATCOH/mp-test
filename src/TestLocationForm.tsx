@@ -12,29 +12,41 @@ import { Locations, Envs, Servers } from "types";
 import { formatData } from "utils";
 
 type Props = {
+  id: number;
   locations: Locations;
   envs: Envs;
   servers: Servers;
+  onDelete: VoidFunction;
 };
 
-const TestLocationForm: FC<Props> = ({ locations, envs, servers }) => {
+const TestLocationForm: FC<Props> = ({
+  id,
+  locations,
+  envs,
+  servers,
+  onDelete,
+}) => {
   return (
-    <div>
-      <div>
-        <h2>
-          <FontAwesomeIcon icon={faFlask} /> Тестовая локация
+    <div className="test-location-form">
+      <div className="test-location-form__row">
+        <h2 className="title">
+          <FontAwesomeIcon icon={faFlask} /> Тестовая локация {id + 1}
         </h2>
-        <button>
-          <FontAwesomeIcon icon={faTrashCan} />
+        <button className="button-delete" onClick={onDelete}>
+          <FontAwesomeIcon icon={faTrashCan} color="var(--color-error)" />
         </button>
       </div>
 
-      <div>
-        {/* <FontAwesomeIcon icon={faLocationDot} /> */}
-        <select name="locations">
-          <option value="">locations</option>
-        </select>
-        {/* <FontAwesomeIcon icon={faLeaf} /> */}
+      <div className="test-location-form__row">
+        <div>
+          Локация <FontAwesomeIcon icon={faLocationDot} />
+          <select name="locations">
+            <option value="">locations</option>
+          </select>
+        </div>
+        <div>
+          Среда <FontAwesomeIcon icon={faLeaf} />
+        </div>
         <select name="environments">
           <option value="">environments</option>
         </select>
@@ -43,10 +55,13 @@ const TestLocationForm: FC<Props> = ({ locations, envs, servers }) => {
         </p>
       </div>
 
-      <label>
-        <FontAwesomeIcon icon={faQuestion} />
-        <input type="text" placeholder="Комментарий по локации" />
-      </label>
+      <div className="test-location-form__row">
+        Подсказка
+        <label>
+          <FontAwesomeIcon icon={faQuestion} />
+          <input type="text" placeholder="Комментарий по локации" />
+        </label>
+      </div>
     </div>
   );
 };

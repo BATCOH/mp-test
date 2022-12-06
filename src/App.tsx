@@ -6,7 +6,7 @@ export default function App() {
   const store = useContext(storeContext);
 
   return (
-    <div className="App">
+    <div className="app">
       <TestLocationsList store={store} />
     </div>
   );

@@ -21,11 +21,32 @@ export interface Server {
 
 export type Servers = Server[];
 
+export interface UserForm {
+  locationID: number;
+  envID: number;
+  hint: string;
+}
+
+export type UserForms = UserForm[];
+
 export interface Store {
   isLoaded: boolean;
   locations: Location[];
   envs: Env[];
   servers: Server[];
+  userForms: UserForms;
+
   fetchData: VoidFunction;
-  createNewLocation: (id: number, name: string) => void;
+  createNewForm: (params: {
+    locationID: number;
+    envID: number;
+    hint: string;
+  }) => void;
+  deleteForm: (id: number) => void;
+  updateForm: (params: {
+    id: number;
+    locationID: number;
+    envID: number;
+    hint: string;
+  }) => void;
 }
