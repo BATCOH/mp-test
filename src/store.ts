@@ -1,37 +1,22 @@
 import { makeAutoObservable, runInAction } from "mobx";
-
 import { createContext } from "react";
+import { Store, Locations, Envs, Servers } from "types";
+import { sleep } from "utils";
 import sample from "./data.json";
 
-function sleep(ms: number): Promise<void> {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+class AppStore implements Store {
+  isLoaded: boolean = false;
+  locations: Locations = [];
+  envs: Envs = [];
+  servers: Servers = [];
 
-export interface Location {
-  locationID: number;
-  name: string;
-}
-
-export interface Env {
-  envID: number;
-  name: string;
-}
-
-export interface Server {
-  serverID: number;
-  name: string;
-  locationID: number;
-  envID: number;
-}
-
-export class Store {
-  isLoaded = false;
-  locations: Location[] = [];
-  envs: Env[] = [];
-  servers: Server[] = [];
+  constructor() {
+    makeAutoObservable(this);
+  }
 
   fetchData = async () => {
-    await sleep(3000);
+    await sleep(1_000);
+
     runInAction(() => {
       this.locations = sample.locations;
       this.envs = sample.envs;
@@ -40,10 +25,13 @@ export class Store {
     });
   };
 
-  constructor() {
-    makeAutoObservable(this);
+  createNewLocation(id: number, name: string) {
+    this.locations.push({
+      locationID: id,
+      name,
+    });
   }
 }
 
-export const store = new Store();
+export const store = new AppStore();
 export const storeContext = createContext(store);
